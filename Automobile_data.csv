@@ -1,0 +1,158 @@
+# Youtube Link: https://www.youtube.com/watch?v=PgLjwl6Br0k
+
+import tkinter as tk
+from tkinter import filedialog, messagebox, ttk
+
+import pandas as pd
+
+# initalise the tkinter GUI
+root = tk.Tk()
+
+root.geometry("800x800") # set the root dimensions
+root.pack_propagate(False) # tells the root to not let the widgets inside it determine its size.
+root.resizable(0, 0) # makes the root window fixed in size.
+root.configure(bg='white')
+root.title("Welcome to Automobiles APP")
+# Frame for TreeView
+frame1 = tk.LabelFrame(root, text=" Automobile Results")
+frame1.place(height=400, width=400)
+frame1.configure(bg='red')
+# Frame for open file dialog
+choose_frame = tk.LabelFrame(root, text="Choose your Automobile")
+choose_frame.place(height=100, width=400, rely=0.8, relx=0)
+choose_frame.configure(bg='light blue')
+# Buttons
+button1 = tk.Button(choose_frame, text="Show All", command=lambda: show_all())
+button1.place(rely=0.100, relx=0.10)
+
+button2 = tk.Button(choose_frame, text="Toyota only", command=lambda: Load_Toyota())
+button2.place(rely=0.100, relx=0.30)
+
+button3 = tk.Button(choose_frame, text="BMW only", command=lambda: Load_BMW())
+button3.place(rely=0.100, relx=0.50)
+
+button4 = tk.Button(choose_frame, text="Chevrolet only", command=lambda: Load_CHEVROLET())
+button4.place(rely=0.50, relx=0.50)
+
+button5 = tk.Button(choose_frame, text="Honda only", command=lambda: Load_HONDA())
+button5.place(rely=0.50, relx=0.30)
+
+button6 = tk.Button(choose_frame, text="Jaguar only", command=lambda: Load_JAGUAR())
+button6.place(rely=0.50, relx=0.10)
+
+## Treeview Widget
+tv1 = ttk.Treeview(frame1)
+tv1.place(relheight=1, relwidth=1) # set the height and width of the widget to 100% of its container (frame1).
+treescrolly = tk.Scrollbar(frame1, orient="vertical", command=tv1.yview) # command means update the yaxis view of the widget
+treescrollx = tk.Scrollbar(frame1, orient="horizontal", command=tv1.xview) # command means update the xaxis view of the widget
+tv1.configure(xscrollcommand=treescrollx.set, yscrollcommand=treescrolly.set) # assign the scrollbars to the Treeview Widget
+treescrollx.pack(side="bottom", fill="x") # make the scrollbar fill the x axis of the Treeview widget
+treescrolly.pack(side="right", fill="y") # make the scrollbar fill the y axis of the Treeview widget
+
+
+def show_all():
+    
+     df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+     clear_data()
+     tv1["column"] = list(df.columns)
+     tv1["show"] = "headings"
+     for column in tv1["columns"]:
+         tv1.heading(column, text=column, anchor='center') # let the column heading = column name 
+     df_rows = df.to_numpy().tolist() # turns the dataframe into a list of lists
+     
+     for row in df_rows:
+         tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+     return None
+
+
+def Load_Toyota():
+    df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+    car_Manufacturers = df.groupby('company')
+    toyotaDf = car_Manufacturers.get_group('toyota')
+    toyotaDf  
+      
+    clear_data()
+    tv1["column"] = list(toyotaDf.columns)
+    tv1["show"] = "headings"
+    for column in tv1["columns"]:
+        tv1.heading(column, text=column, anchor='center') # let the column heading = column name
+
+    toyotaDf_rows = toyotaDf.to_numpy().tolist() # turns the dataframe into a list of lists
+    for row in toyotaDf_rows:
+        tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+    return None
+
+def Load_BMW():
+    df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+    car_Manufacturers = df.groupby('company')
+    toyotaDf = car_Manufacturers.get_group('bmw')
+    toyotaDf  
+      
+    clear_data()
+    tv1["column"] = list(toyotaDf.columns)
+    tv1["show"] = "headings"
+    for column in tv1["columns"]:
+        tv1.heading(column, text=column, anchor='center') # let the column heading = column name
+
+    toyotaDf_rows = toyotaDf.to_numpy().tolist() # turns the dataframe into a list of lists
+    for row in toyotaDf_rows:
+        tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+    return None
+
+def Load_CHEVROLET():
+    df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+    car_Manufacturers = df.groupby('company')
+    toyotaDf = car_Manufacturers.get_group('chevrolet')
+    toyotaDf  
+      
+    clear_data()
+    tv1["column"] = list(toyotaDf.columns)
+    tv1["show"] = "headings"
+    for column in tv1["columns"]:
+        tv1.heading(column, text=column, anchor='center') # let the column heading = column name
+
+    toyotaDf_rows = toyotaDf.to_numpy().tolist() # turns the dataframe into a list of lists
+    for row in toyotaDf_rows:
+        tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+    return None
+
+def Load_HONDA():
+    df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+    car_Manufacturers = df.groupby('company')
+    toyotaDf = car_Manufacturers.get_group('honda')
+    toyotaDf  
+      
+    clear_data()
+    tv1["column"] = list(toyotaDf.columns)
+    tv1["show"] = "headings"
+    for column in tv1["columns"]:
+        tv1.heading(column, text=column, anchor='center') # let the column heading = column name
+
+    toyotaDf_rows = toyotaDf.to_numpy().tolist() # turns the dataframe into a list of lists
+    for row in toyotaDf_rows:
+        tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+    return None
+
+def Load_JAGUAR():
+    df = pd.read_csv("D:\\Training\\Automobile_data.csv")
+    car_Manufacturers = df.groupby('company')
+    toyotaDf = car_Manufacturers.get_group('jaguar')
+    toyotaDf  
+      
+    clear_data()
+    tv1["column"] = list(toyotaDf.columns)
+    tv1["show"] = "headings"
+    for column in tv1["columns"]:
+        tv1.heading(column, text=column, anchor='center') # let the column heading = column name
+
+    toyotaDf_rows = toyotaDf.to_numpy().tolist() # turns the dataframe into a list of lists
+    for row in toyotaDf_rows:
+        tv1.insert("", "end", values=row) # inserts each list into the treeview. For parameters see https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Treeview.insert
+    return None
+
+def clear_data():
+    tv1.delete(*tv1.get_children())
+    return None
+
+
+root.mainloop()
